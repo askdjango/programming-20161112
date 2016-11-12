@@ -13,7 +13,7 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:entries="@array/gugudan_list" />
+        android:layout_height="match_parent" />
+    <!-- android:entries="@array/gugudan_list" 사용안함 -->
 
 </RelativeLayout>
