@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gugudan_list">
+        <item>2단</item>
+        <item>3단</item>
+        <item>4단</item>
+        <item>5단</item>
+        <item>6단</item>
+        <item>7단</item>
+        <item>8단</item>
+        <item>9단</item>
+    </string-array>
+</resources>
