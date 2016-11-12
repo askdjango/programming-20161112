@@ -26,10 +26,18 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_naver_webtoon_list);
 
         Webtoon[] webtoonList = {
-            new Webtoon("고수", "문정후", "http://thumb.comic.naver.net/webtoon/662774/thumbnail/title_thumbnail_20151002175819_t125x101.jpg"),
-            new Webtoon("마음의 소리", "조석", "http://thumb.comic.naver.net/webtoon/662774/thumbnail/title_thumbnail_20151002175819_t125x101.jpg"),
-            new Webtoon("노블레스", "손재호/이광수", "http://thumb.comic.naver.net/webtoon/25455/thumbnail/title_thumbnail_20100614120245_t125x101.jpg"),
-            new Webtoon("신의탑", "SIU", "http://thumb.comic.naver.net/webtoon/183559/thumbnail/title_thumbnail_20160516123017_t125x101.jpg")
+            new Webtoon("고수", "문정후",
+                "http://comic.naver.com/webtoon/list.nhn?titleId=662774",
+                "http://thumb.comic.naver.net/webtoon/662774/thumbnail/title_thumbnail_20151002175819_t125x101.jpg"),
+            new Webtoon("마음의 소리", "조석",
+                "http://comic.naver.com/webtoon/list.nhn?titleId=20853",
+                "http://thumb.comic.naver.net/webtoon/20853/thumbnail/thumbnail_title_20853_125x101.gif"),
+            new Webtoon("노블레스", "손재호/이광수",
+                "http://comic.naver.com/webtoon/list.nhn?titleId=25455",
+                "http://thumb.comic.naver.net/webtoon/25455/thumbnail/title_thumbnail_20100614120245_t125x101.jpg"),
+            new Webtoon("신의탑", "SIU",
+                "http://comic.naver.com/webtoon/list.nhn?titleId=183559",
+                "http://thumb.comic.naver.net/webtoon/183559/thumbnail/title_thumbnail_20160516123017_t125x101.jpg")
         };
         final WebtoonArrayAdapter adapter = new WebtoonArrayAdapter(this, 0, webtoonList);
 
@@ -43,7 +51,7 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(view.getContext(), NaverWebtoonDetailActivity.class);
                 // intent.putExtra("webtoon", webtoon);   // TODO: Parcelable
-                intent.putExtra("webtoonUrl", "http://m.naver.com");
+                intent.putExtra("webtoonUrl", webtoon.pageUrl);
                 startActivity(intent);
             }
         });
@@ -86,11 +94,13 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
     class Webtoon {
         String title;
         String author;
+        String pageUrl;
         String profileImageUrl;
 
-        Webtoon(String title, String author, String profileImageUrl) {
+        Webtoon(String title, String author, String pageUrl, String profileImageUrl) {
             this.title = title;
             this.author = author;
+            this.pageUrl = pageUrl;
             this.profileImageUrl = profileImageUrl;
         }
     }
