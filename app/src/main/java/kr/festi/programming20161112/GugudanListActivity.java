@@ -7,6 +7,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class GugudanListActivity extends AppCompatActivity {
 
     @Override
@@ -19,7 +21,16 @@ public class GugudanListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 String name = (String) adapterView.getAdapter().getItem(position);
-                Toast.makeText(view.getContext(), name, Toast.LENGTH_SHORT).show();
+
+                StringBuffer resultString = new StringBuffer();
+                int number = (position+2);
+                for(int i=1; i<=9; i++) {
+                    int result = number * i;
+                    resultString.append(String.format("%d * %d = %d\n", number, i, result));
+                }
+
+                String message = String.format("%s\n\n%s", name, resultString.toString());
+                Toast.makeText(view.getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
     }
