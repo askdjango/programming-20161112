@@ -13,11 +13,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        View view = findViewById(R.id.firstListViewButton);
-        view.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.firstListViewButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, GugudanListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.secondListViewButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, NaverWebtoonListActivity.class);
                 startActivity(intent);
             }
         });
