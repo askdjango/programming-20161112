@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".GugudanListActivity" />
-        <activity android:name=".NaverWebtoonListActivity"></activity>
+        <activity android:name=".NaverWebtoonListActivity" />
+        <activity android:name=".NaverWebtoonDetailActivity"></activity>
     </application>
 
 </manifest>

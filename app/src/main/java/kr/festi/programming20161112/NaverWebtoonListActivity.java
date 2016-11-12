@@ -1,11 +1,13 @@
 package kr.festi.programming20161112;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -29,10 +31,22 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
             new Webtoon("노블레스", "손재호/이광수", "http://thumb.comic.naver.net/webtoon/25455/thumbnail/title_thumbnail_20100614120245_t125x101.jpg"),
             new Webtoon("신의탑", "SIU", "http://thumb.comic.naver.net/webtoon/183559/thumbnail/title_thumbnail_20160516123017_t125x101.jpg")
         };
-        WebtoonArrayAdapter adapter = new WebtoonArrayAdapter(this, 0, webtoonList);
+        final WebtoonArrayAdapter adapter = new WebtoonArrayAdapter(this, 0, webtoonList);
 
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Webtoon webtoon = (Webtoon) adapterView.getAdapter().getItem(position);
+
+                Intent intent = new Intent(view.getContext(), NaverWebtoonDetailActivity.class);
+                // intent.putExtra("webtoon", webtoon);   // TODO: Parcelable
+                intent.putExtra("webtoonUrl", "http://m.naver.com");
+                startActivity(intent);
+            }
+        });
     }
 
     class WebtoonArrayAdapter extends ArrayAdapter<Webtoon> {
