@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -21,10 +24,10 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_naver_webtoon_list);
 
         Webtoon[] webtoonList = {
-            new Webtoon("고수", "문정후"),
-            new Webtoon("용비불패", "문정후"),
-            new Webtoon("노블레스", "손재호/이광수"),
-            new Webtoon("신의탑", "SIU")
+            new Webtoon("고수", "문정후", "http://thumb.comic.naver.net/webtoon/662774/thumbnail/title_thumbnail_20151002175819_t125x101.jpg"),
+            new Webtoon("마음의 소리", "조석", "http://thumb.comic.naver.net/webtoon/662774/thumbnail/title_thumbnail_20151002175819_t125x101.jpg"),
+            new Webtoon("노블레스", "손재호/이광수", "http://thumb.comic.naver.net/webtoon/25455/thumbnail/title_thumbnail_20100614120245_t125x101.jpg"),
+            new Webtoon("신의탑", "SIU", "http://thumb.comic.naver.net/webtoon/183559/thumbnail/title_thumbnail_20160516123017_t125x101.jpg")
         };
         WebtoonArrayAdapter adapter = new WebtoonArrayAdapter(this, 0, webtoonList);
 
@@ -46,6 +49,16 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
 
             Webtoon webtoon = (Webtoon) getItem(position);
 
+            ImageView profileImageView = (ImageView) convertView.findViewById(R.id.profileImageView);
+            // profileImageView.setImageBitmap();
+            Glide
+                .with(convertView.getContext())
+                .load(webtoon.profileImageUrl)
+                .centerCrop()
+                // .placeholder(R.drawable.loading_spinner)
+                .crossFade()
+                .into(profileImageView);
+
             TextView titleTextView = (TextView) convertView.findViewById(R.id.titleTextView);
             TextView authorTextView = (TextView) convertView.findViewById(R.id.authorTextView);
 
@@ -59,10 +72,12 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
     class Webtoon {
         String title;
         String author;
+        String profileImageUrl;
 
-        Webtoon(String title, String author) {
+        Webtoon(String title, String author, String profileImageUrl) {
             this.title = title;
             this.author = author;
+            this.profileImageUrl = profileImageUrl;
         }
     }
 }
