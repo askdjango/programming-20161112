@@ -12,8 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +27,13 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
 
     ArrayList<Webtoon> webtoonList = new ArrayList<>();
 
+    WebtoonArrayAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("네이버 웹툰");
         setContentView(R.layout.activity_naver_webtoon_list);
-
-        String sourceUrl = "https://dl.dropboxusercontent.com/u/698019/askdjango/webtoon_list.json";
 
         webtoonList.add(
             new Webtoon(
@@ -39,7 +44,7 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
             )
         );
 
-        final WebtoonArrayAdapter adapter = new WebtoonArrayAdapter(this, 0, webtoonList);
+        adapter = new WebtoonArrayAdapter(this, 0, webtoonList);
 
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setEmptyView(findViewById(R.id.listViewEmptyView));
@@ -62,6 +67,23 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        loadWebtoonList();
+    }
+
+    void loadWebtoonList() {
+        String sourceUrl = "https://dl.dropboxusercontent.com/u/698019/askdjango/webtoon_list.json";
+        Ion.with(this)
+            .load(sourceUrl)
+            .as(new TypeToken<List<Webtoon>>(){})
+            .setCallback(new FutureCallback<List<Webtoon>>() {
+                @Override
+                public void onCompleted(Exception e, List<Webtoon> result) {
+                    webtoonList.clear();
+                    webtoonList.addAll(result);
+                    adapter.notifyDataSetChanged();
+                }
+            });
     }
 
     class WebtoonArrayAdapter extends ArrayAdapter<Webtoon> {
