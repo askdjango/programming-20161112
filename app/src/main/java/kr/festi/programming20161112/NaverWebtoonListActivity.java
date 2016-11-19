@@ -46,7 +46,7 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
                 "고수",
                 "문정후",
                 "http://comic.naver.com/webtoon/list.nhn?titleId=662774",
-                "http://thumb.comic.naver.net/webtoon/662774/thumbnail/title_thumbnail_20151002175819_t125x101.jpg"
+                "http://thumb.comic.naver.net/webtoon/662774/thumbnail/title_thumbnail_20151002175819_t125x101.jpg - not found"
             )
         );
 
@@ -118,6 +118,7 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
                 .load(webtoon.profileImageUrl)
                 .centerCrop()
                 .placeholder(R.drawable.progress_animation)
+                .error(R.drawable.network_connection_error)
                 // .placeholder(R.drawable.loading_spinner)
                 .crossFade()
                 .into(profileImageView);
