@@ -88,10 +88,19 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
             .setCallback(new FutureCallback<List<Webtoon>>() {
                 @Override
                 public void onCompleted(Exception e, List<Webtoon> result) {
-                    webtoonList.clear();
-                    webtoonList.addAll(result);
-                    adapter.notifyDataSetChanged();
-
+                    if ( e != null ) {
+                        Toast.makeText(NaverWebtoonListActivity.this,
+                            String.format("Exception : %s", e.toString()),
+                            Toast.LENGTH_SHORT).show();
+                    }
+                    else if ( result != null ) {
+                        webtoonList.clear();
+                        webtoonList.addAll(result);
+                        adapter.notifyDataSetChanged();
+                    }
+                    else {
+                        Toast.makeText(NaverWebtoonListActivity.this, "result is null.", Toast.LENGTH_SHORT).show();
+                    }
                     progressDialog.dismiss();
                 }
             });
