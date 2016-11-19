@@ -15,9 +15,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NaverWebtoonListActivity extends AppCompatActivity {
+
+    ArrayList<Webtoon> webtoonList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,23 +28,21 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
         setTitle("네이버 웹툰");
         setContentView(R.layout.activity_naver_webtoon_list);
 
-        Webtoon[] webtoonList = {
-            new Webtoon("고수", "문정후",
+        String sourceUrl = "https://dl.dropboxusercontent.com/u/698019/askdjango/webtoon_list.json";
+
+        webtoonList.add(
+            new Webtoon(
+                "고수",
+                "문정후",
                 "http://comic.naver.com/webtoon/list.nhn?titleId=662774",
-                "http://thumb.comic.naver.net/webtoon/662774/thumbnail/title_thumbnail_20151002175819_t125x101.jpg"),
-            new Webtoon("마음의 소리", "조석",
-                "http://comic.naver.com/webtoon/list.nhn?titleId=20853",
-                "http://thumb.comic.naver.net/webtoon/20853/thumbnail/thumbnail_title_20853_125x101.gif"),
-            new Webtoon("노블레스", "손재호/이광수",
-                "http://comic.naver.com/webtoon/list.nhn?titleId=25455",
-                "http://thumb.comic.naver.net/webtoon/25455/thumbnail/title_thumbnail_20100614120245_t125x101.jpg"),
-            new Webtoon("신의탑", "SIU",
-                "http://comic.naver.com/webtoon/list.nhn?titleId=183559",
-                "http://thumb.comic.naver.net/webtoon/183559/thumbnail/title_thumbnail_20160516123017_t125x101.jpg")
-        };
+                "http://thumb.comic.naver.net/webtoon/662774/thumbnail/title_thumbnail_20151002175819_t125x101.jpg"
+            )
+        );
+
         final WebtoonArrayAdapter adapter = new WebtoonArrayAdapter(this, 0, webtoonList);
 
         ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setEmptyView(findViewById(R.id.listViewEmptyView));
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -64,7 +65,7 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
     }
 
     class WebtoonArrayAdapter extends ArrayAdapter<Webtoon> {
-        public WebtoonArrayAdapter(Context context, int resource, Webtoon[] objects) {
+        public WebtoonArrayAdapter(Context context, int resource, ArrayList<Webtoon> objects) {
             super(context, resource, objects);
         }
 

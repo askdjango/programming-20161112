@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_naver_webtoon_list"
     android:layout_width="match_parent"
@@ -10,9 +10,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="kr.festi.programming20161112.NaverWebtoonListActivity">
 
+    <TextView
+        android:id="@+id/listViewEmptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:text="비었소 ~ !!!" />
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</RelativeLayout>
+</FrameLayout>
