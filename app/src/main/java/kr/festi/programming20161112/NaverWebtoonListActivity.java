@@ -1,5 +1,6 @@
 package kr.festi.programming20161112;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -28,12 +29,17 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
     ArrayList<Webtoon> webtoonList = new ArrayList<>();
 
     WebtoonArrayAdapter adapter;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("네이버 웹툰");
         setContentView(R.layout.activity_naver_webtoon_list);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        // progressDialog.setMessage("Loading ...");
 
         webtoonList.add(
             new Webtoon(
@@ -73,6 +79,9 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
 
     void loadWebtoonList() {
         String sourceUrl = "https://dl.dropboxusercontent.com/u/698019/askdjango/webtoon_list.json";
+
+        progressDialog.show();
+
         Ion.with(this)
             .load(sourceUrl)
             .as(new TypeToken<List<Webtoon>>(){})
@@ -82,6 +91,8 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
                     webtoonList.clear();
                     webtoonList.addAll(result);
                     adapter.notifyDataSetChanged();
+
+                    progressDialog.dismiss();
                 }
             });
     }
