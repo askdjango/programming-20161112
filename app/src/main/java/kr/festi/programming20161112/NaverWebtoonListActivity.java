@@ -117,6 +117,7 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
                 .with(convertView.getContext())
                 .load(webtoon.profileImageUrl)
                 .centerCrop()
+                .placeholder(R.drawable.progress_animation)
                 // .placeholder(R.drawable.loading_spinner)
                 .crossFade()
                 .into(profileImageView);
