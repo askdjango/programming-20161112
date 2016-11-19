@@ -50,8 +50,14 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
                 Webtoon webtoon = (Webtoon) adapterView.getAdapter().getItem(position);
 
                 Intent intent = new Intent(view.getContext(), NaverWebtoonDetailActivity.class);
-                // intent.putExtra("webtoon", webtoon);   // TODO: Parcelable
-                intent.putExtra("webtoonUrl", webtoon.pageUrl);
+                intent.putExtra("webtoon", webtoon);   // TODO: Parcelable
+                // intent.putExtra("webtoonUrl", webtoon.pageUrl);
+
+                // intent.putExtra("title", webtoon.title);
+                // intent.putExtra("author", webtoon.author);
+                // intent.putExtra("pageUrl", webtoon.pageUrl);
+                // intent.putExtra("profileImageUrl", webtoon.profileImageUrl);
+
                 startActivity(intent);
             }
         });
@@ -88,20 +94,6 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
             authorTextView.setText(webtoon.author);
 
             return convertView;
-        }
-    }
-
-    class Webtoon {
-        String title;
-        String author;
-        String pageUrl;
-        String profileImageUrl;
-
-        Webtoon(String title, String author, String pageUrl, String profileImageUrl) {
-            this.title = title;
-            this.author = author;
-            this.pageUrl = pageUrl;
-            this.profileImageUrl = profileImageUrl;
         }
     }
 }

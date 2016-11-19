@@ -14,7 +14,9 @@ public class NaverWebtoonDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_naver_webtoon_detail);
 
-        String webtoonUrl = getIntent().getStringExtra("webtoonUrl");
+        Webtoon webtoon = getIntent().getParcelableExtra("webtoon");
+
+        // String webtoonUrl = getIntent().getStringExtra("webtoonUrl");
 
         WebView webView = (WebView) findViewById(R.id.webView);
         webView.setWebViewClient(new MyWebViewClient());
@@ -22,7 +24,7 @@ public class NaverWebtoonDetailActivity extends AppCompatActivity {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
 
-        webView.loadUrl(webtoonUrl);
+        webView.loadUrl(webtoon.pageUrl);
     }
 
     private class MyWebViewClient extends WebViewClient {
