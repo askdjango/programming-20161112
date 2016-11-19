@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -75,6 +77,24 @@ public class NaverWebtoonListActivity extends AppCompatActivity {
         });
 
         loadWebtoonList();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.naver_webtoon_list_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if ( itemId == R.id.refreshMenu ) {
+            loadWebtoonList();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     void loadWebtoonList() {
